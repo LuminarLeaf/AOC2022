@@ -5,9 +5,9 @@ class Q7p2 {
     public static void main(String[] args) throws FileNotFoundException {
         File file = new File("Q7inp.txt");
         Scanner sc = new Scanner(file);
-        NodeQ7<String> root = new NodeQ7<String>("/");
+        DirNode<String> root = new DirNode<String>("/");
         root.parent = null;
-        NodeQ7<String> current = root;
+        DirNode<String> current = root;
         while (sc.hasNextLine()) {
             String[] input = sc.nextLine().split(" ");
             if (input[0].equals("$")) {

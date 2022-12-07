@@ -1,20 +1,20 @@
 import java.util.*;
 
-public class NodeQ7<T> {
+public class DirNode<T> {
     T data;
     long size = 0;
-    NodeQ7<T> parent;
-    List<NodeQ7<T>> children;
+    DirNode<T> parent;
+    List<DirNode<T>> children;
     List<String> files = new ArrayList<String>();
     List<Long> sizes = new ArrayList<Long>();
 
-    public NodeQ7(T data) {
+    public DirNode(T data) {
         this.data = data;
-        this.children = new ArrayList<NodeQ7<T>>();
+        this.children = new ArrayList<DirNode<T>>();
     }
 
     public void addChild(T child) {
-        NodeQ7<T> childNode = new NodeQ7<T>(child);
+        DirNode<T> childNode = new DirNode<T>(child);
         childNode.parent = this;
         this.children.add(childNode);
     }
@@ -39,7 +39,7 @@ public class NodeQ7<T> {
         return size;
     }
 
-    public void printTree(NodeQ7<T> current, int depth) {
+    public void printTree(DirNode<T> current, int depth) {
         for (int i = 0; i < depth; i++) {
             System.out.print(" ");
         }
@@ -55,7 +55,7 @@ public class NodeQ7<T> {
         }
     }
 
-    public void findSmallDirs(NodeQ7<T> current, List<String> smallDirs, List<Long> smallSizes) {
+    public void findSmallDirs(DirNode<T> current, List<String> smallDirs, List<Long> smallSizes) {
         if (current.size < 100000) {
             smallDirs.add((String) current.data);
             smallSizes.add(current.size);
@@ -65,7 +65,7 @@ public class NodeQ7<T> {
         }
     }
 
-    public void DeleteNode(NodeQ7<T> current) {
+    public void DeleteNode(DirNode<T> current) {
         if (current.parent != null) {
             current.files.clear();
             current.sizes.clear();
@@ -78,7 +78,7 @@ public class NodeQ7<T> {
         }
     }
 
-    public void DeleteFile(NodeQ7<T> current, String file) {
+    public void DeleteFile(DirNode<T> current, String file) {
         for (int i = 0; i < current.files.size(); i++) {
             if (current.files.get(i).equals(file)) {
                 current.files.remove(i);
@@ -89,7 +89,7 @@ public class NodeQ7<T> {
         }
     }
 
-    public void findDirs(NodeQ7<T> current, List<String> Dirs, List<Long> Sizes) {
+    public void findDirs(DirNode<T> current, List<String> Dirs, List<Long> Sizes) {
         Dirs.add((String) current.data);
         Sizes.add(current.size);
         for (int i = 0; i < current.children.size(); i++) {
